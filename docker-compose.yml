@@ -1,0 +1,21 @@
+version: "0.1"
+services:
+  #dynamodb:
+  #  image: "amazon/dynamodb-local:latest"
+  #  ports:
+  #    - "8000:8000"
+  #  volumes:
+  #    - ./data/dynamodb:/home/dynamodblocal/data
+  #  workingdir:
+  #    - dynamodb-local
+  app:
+    build: .
+    ports:
+      - "4300:4300"
+    volumes:
+      - ./src:/app
+      - .aws:/root/.aws
+    command: chalice local --host=0.0.0.0 --port=4300
+    tty: true
+    stdin_open: true
+    working_dir: ${APP_PATH}
